@@ -18,6 +18,7 @@ const resProto = Cc[
   "@mozilla.org/network/protocol;1?name=resource"
 ].getService(Ci.nsISubstitutingProtocolHandler);
 
+const MCP_HOST = "0.0.0.0";
 const MCP_PORT = 8765;
 const MAX_SEARCH_RESULTS = 50;
 
@@ -566,7 +567,7 @@ var mcpServer = class extends ExtensionCommon.ExtensionAPI {
               })();
             });
 
-            server.start(MCP_PORT);
+            server._start(MCP_PORT, MCP_HOST);
             console.log(`Thunderbird MCP server listening on port ${MCP_PORT}`);
             return { success: true, port: MCP_PORT };
           } catch (e) {
